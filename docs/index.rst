@@ -4,21 +4,17 @@ vishap
 
 Description
 ==================================
-URLs to embed code of video sharing services (like Youtube or Vimeo) made simple. Produces HTML from
-the URL given according to the rules specified in the plugins.
+Generate embed (HTML) code of services like Youtube or Vimeo from URLs given. Rules are specified
+in the plugins.
 
 Comes with plugins for the following services (listed in alphabetical order):
 
 - Vimeo
 - Youtube
 
-There are also a number of useful tools included, such as:
-
-- Django template tags and form fields (with validation).
-
 Installation
 ==================================
-Install with latest stable version from pypi:
+Install with latest stable version from PyPI:
 
     $ pip install vishap
 
@@ -26,9 +22,9 @@ or install the latest stable version from bitbucket:
 
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/vishap@stable#egg=vishap
 
-or install into python path:
+or install the latest stable version from github:
 
-    $ python setup.py install
+    $ pip install -e git+http://github.org/barseghyanartur/vishap@stable#egg=vishap
 
 That's all. See the `Usage and examples` section for more.
 
@@ -68,16 +64,16 @@ Example
 
 Your CSS file should then look similar to the following
 
-.video-wrapper {
-    width: 600px;
-    height: 500px;
-    padding: 0;
-}
-    .video-wrapper iframe {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-    }
+>>> .video-wrapper {
+>>>     width: 600px;
+>>>     height: 500px;
+>>>     padding: 0;
+>>> }
+>>>     .video-wrapper iframe {
+>>>         position: absolute;
+>>>         width: 100%;
+>>>         height: 100%;
+>>>     }
 
 Register a custom plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

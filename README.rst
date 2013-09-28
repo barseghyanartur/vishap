@@ -24,7 +24,7 @@ or install the latest stable version from bitbucket:
 
 or install the latest stable version from github:
 
-    $ pip install -e git+https://github.org/barseghyanartur/vishap@stable#egg=vishap
+    $ pip install -e git+http://github.org/barseghyanartur/vishap@stable#egg=vishap
 
 That's all. See the `Usage and examples` section for more.
 
