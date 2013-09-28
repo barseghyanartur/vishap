@@ -2,7 +2,7 @@ __title__ = 'vishap.contrib.plugins.youtube.vishap_plugin'
 __version__ = '0.1'
 __build__ = 0x000001
 __author__ = 'Artur Barseghyan'
-__all__ = ('VimeoPlugin',)
+__all__ = ('YoutubePlugin',)
 
 from vishap.base import BaseVideoPlugin, plugin_registry
 
