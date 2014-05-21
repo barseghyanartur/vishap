@@ -1,12 +1,11 @@
 __title__ = 'vishap.discover'
-__version__ = '0.1'
-__build__ = 0x000001
 __author__ = 'Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('autodiscover',)
 
 import os
-
-from six import print_
+import logging
 
 try:
     from importlib import import_module
@@ -16,13 +15,14 @@ except ImportError:
 from vishap.helpers import PROJECT_DIR
 from vishap.conf import get_setting
 
+logger = logging.getLogger(__name__)
+
 def autodiscover():
     """
     Autodiscovers the plugins in contrib/plugins.
     """
     PLUGINS_DIR = get_setting('PLUGINS_DIR')
     PLUGIN_MODULE_NAME = get_setting('PLUGIN_MODULE_NAME')
-    DEBUG = get_setting('DEBUG')
 
     for app_path in os.listdir(PROJECT_DIR(PLUGINS_DIR)):
         full_app_path = list(PLUGINS_DIR)
@@ -33,10 +33,8 @@ def autodiscover():
                     "vishap.{0}.{1}.{2}".format('.'.join(PLUGINS_DIR), app_path, PLUGIN_MODULE_NAME)
                     )
             except ImportError as e:
-                if DEBUG:
-                    print_(e)
+                logger.debug(str(e))
             except Exception as e:
-                if DEBUG:
-                    print_(e)
+                logger.debug(str(e))
         else:
             pass
