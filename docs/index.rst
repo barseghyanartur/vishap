@@ -34,20 +34,40 @@ Simple usage
 ----------------------------------
 Required imports
 
->>> from vishap import render_video
+.. code-block:: python
+
+    from vishap import render_video
 
 Rendering Vimeo code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>> print render_video('http://vimeo.com/45655450', 500, 281)
-<iframe src="//player.vimeo.com/video/45655450" width="500" height="281"
-frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-</iframe>
+The following code:
+
+.. code-block:: python
+
+    print render_video('http://vimeo.com/45655450', 500, 281)
+
+Would result the following output:
+
+.. code-block:: html
+
+    <iframe src="//player.vimeo.com/video/45655450" width="500" height="281"
+    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+    </iframe>
 
 Rendering Youtube code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>> print render_video('http://www.youtube.com/watch?v=LIPl7PtGXNI', 560, 315)
-<iframe width="560" height="315" src="//www.youtube.com/embed/LIPl7PtGXNI"
-frameborder="0" allowfullscreen></iframe>
+The following code:
+
+.. code-block:: python
+
+    print render_video('http://www.youtube.com/watch?v=LIPl7PtGXNI', 560, 315)
+
+Would result the following output:
+
+.. code-block:: html
+
+    <iframe width="560" height="315" src="//www.youtube.com/embed/LIPl7PtGXNI"
+    frameborder="0" allowfullscreen></iframe>
 
 Filling available area
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -56,54 +76,62 @@ attributes and place it in a container to which it shall stretch.
 
 Example
 
->>> s = """<div class="video-wrapper">
->>> {embed_code}
->>> </div>""".format(
->>>     embed_code = render_video('http://www.youtube.com/watch?v=LIPl7PtGXNI')
->>> )
+.. code-block:: python
+
+    s = """<div class="video-wrapper">
+    {embed_code}
+    </div>""".format(
+        embed_code = render_video('http://www.youtube.com/watch?v=LIPl7PtGXNI')
+    )
 
 Your CSS file should then look similar to the following
 
->>> .video-wrapper {
->>>     width: 600px;
->>>     height: 500px;
->>>     padding: 0;
->>> }
->>>     .video-wrapper iframe {
->>>         position: absolute;
->>>         width: 100%;
->>>         height: 100%;
->>>     }
+.. code-block:: css
+
+    .video-wrapper {
+        width: 600px;
+        height: 500px;
+        padding: 0;
+    }
+        .video-wrapper iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
 
 Register a custom plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>> class ExamplePlugin(BaseVideoPlugin):
->>>     uid = "example"
->>>     name = "Example"
->>>     url_pattern = "^(?P<prefix>(http\:\/\/www\.youtube\.com\/watch\?v=)|(http\:\/\/www\.youtube\.com\/v\/)|(http\:\/\/youtu\.be\/))(?P<value>[A-Za-z0-9\-=_]{11})"
->>>     id_pattern = "^(?P<value>[A-Za-z0-9\-=_]{11})"
->>>     thumbnail_pattern = "//img.youtube.com/vi/{0}/{1}.jpg"
->>>     embed_code = """
->>>     <iframe src="//www.youtube.com/embed/{video_id}" {options} frameborder="0" allowfullscreen></iframe>
->>>     """
->>>
->>> plugin_registry.register(ExamplePlugin)
+.. code-block:: python
+
+    class ExamplePlugin(BaseVideoPlugin):
+        uid = "example"
+        name = "Example"
+        url_pattern = "^(?P<prefix>(http\:\/\/www\.youtube\.com\/watch\?v=)|(http\:\/\/www\.youtube\.com\/v\/)|(http\:\/\/youtu\.be\/))(?P<value>[A-Za-z0-9\-=_]{11})"
+        id_pattern = "^(?P<value>[A-Za-z0-9\-=_]{11})"
+        thumbnail_pattern = "//img.youtube.com/vi/{0}/{1}.jpg"
+        embed_code = """
+        <iframe src="//www.youtube.com/embed/{video_id}" {options} frameborder="0" allowfullscreen></iframe>
+        """
+
+    plugin_registry.register(ExamplePlugin)
 
 Replacing existing plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you want to replace/update existing plugin, you can force register it in the registry.
 
->>> class UpdatedYoutubePlugin(BaseVideoPlugin):
->>>     uid = "youtube"
->>>     name = "Youtube"
->>>     url_pattern = "^(?P<prefix>(http\:\/\/www\.youtube\.com\/watch\?v=)|(http\:\/\/www\.youtube\.com\/v\/)|(http\:\/\/youtu\.be\/))(?P<value>[A-Za-z0-9\-=_]{11})"
->>>     id_pattern = "^(?P<value>[A-Za-z0-9\-=_]{11})"
->>>     thumbnail_pattern = "//img.youtube.com/vi/{0}/{1}.jpg"
->>>     embed_code = """
->>>     <iframe src="//www.youtube.com/embed/{video_id}" {options} frameborder="0" allowfullscreen></iframe>
->>>     """
->>>
->>> plugin_registry.register(UpdatedYoutubePlugin, force=True)
+.. code-block:: python
+
+    class UpdatedYoutubePlugin(BaseVideoPlugin):
+        uid = "youtube"
+        name = "Youtube"
+        url_pattern = "^(?P<prefix>(http\:\/\/www\.youtube\.com\/watch\?v=)|(http\:\/\/www\.youtube\.com\/v\/)|(http\:\/\/youtu\.be\/))(?P<value>[A-Za-z0-9\-=_]{11})"
+        id_pattern = "^(?P<value>[A-Za-z0-9\-=_]{11})"
+        thumbnail_pattern = "//img.youtube.com/vi/{0}/{1}.jpg"
+        embed_code = """
+        <iframe src="//www.youtube.com/embed/{video_id}" {options} frameborder="0" allowfullscreen></iframe>
+        """
+
+    plugin_registry.register(UpdatedYoutubePlugin, force=True)
 
 Missing a plugin?
 ==================================
@@ -123,17 +151,16 @@ Author
 Artur Barseghyan <artur.barseghyan@gmail.com>
 
 Documentation
-==================================
-
+===============================================
 Contents:
 
 .. toctree::
    :maxdepth: 20
 
-   vishap
+   fobi
 
 Indices and tables
-==================
+===============================================
 
 * :ref:`genindex`
 * :ref:`modindex`
