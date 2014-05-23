@@ -1,6 +1,6 @@
-Package
 ==================================
 vishap
+==================================
 
 Description
 ==================================
@@ -16,13 +16,19 @@ Installation
 ==================================
 Install with latest stable version from PyPI:
 
+.. code-block:: none
+
     $ pip install vishap
 
 or install the latest stable version from bitbucket:
 
+.. code-block:: none
+
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/vishap@stable#egg=vishap
 
 or install the latest stable version from github:
+
+.. code-block:: none
 
     $ pip install -e git+http://github.org/barseghyanartur/vishap@stable#egg=vishap
 
