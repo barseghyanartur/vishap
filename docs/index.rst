@@ -1,11 +1,8 @@
 ==================================
 vishap
 ==================================
-
-Description
-==================================
-Generate embed (HTML) code of services like Youtube or Vimeo from URLs given. Rules are specified
-in the plugins.
+Generate embed (HTML) code of services like Youtube or Vimeo from URLs given.
+Rules are specified in the plugins.
 
 Comes with plugins for the following services (listed in alphabetical order):
 
@@ -77,8 +74,9 @@ Would result the following output:
 
 Filling available area
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you want your embed code to fill the available area, render it without ``width`` and ``height``
-attributes and place it in a container to which it shall stretch.
+If you want your embed code to fill the available area, render it without
+``width`` and ``height`` attributes and place it in a container to which it
+shall stretch.
 
 Example
 
@@ -123,7 +121,8 @@ Register a custom plugin
 
 Replacing existing plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you want to replace/update existing plugin, you can force register it in the registry.
+If you want to replace/update existing plugin, you can force register it in
+the registry.
 
 .. code-block:: python
 
@@ -141,8 +140,9 @@ If you want to replace/update existing plugin, you can force register it in the 
 
 Missing a plugin?
 ==================================
-Missing a plugin for your favourite service? Contribute to the project by making one and it will appear in
-a new version (which will be released very quickly) or request a feature.
+Missing a plugin for your favourite service? Contribute to the project by
+making one and it will appear in a new version (which will be released very
+quickly) or request a feature.
 
 License
 ==================================
