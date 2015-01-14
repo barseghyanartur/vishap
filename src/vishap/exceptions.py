@@ -1,9 +1,11 @@
 __title__ = 'vishap.exceptions'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('PluginCodeError', 'ImproperlyConfigured', 'PluginNotFound', 'PluginDetectionError', \
-           'InvalidRegistryItemType')
+__all__ = (
+    'PluginCodeError', 'ImproperlyConfigured', 'PluginNotFound',
+    'PluginDetectionError', 'InvalidRegistryItemType'
+)
 
 class PluginCodeError(Exception):
     """
@@ -17,7 +19,8 @@ class ImproperlyConfigured(Exception):
 
 class PluginNotFound(Exception):
     """
-    Exception raised when language pack is not found for the language code given.
+    Exception raised when language pack is not found for the language code
+    given.
     """
 
 class PluginDetectionError(Exception):
@@ -27,5 +30,6 @@ class PluginDetectionError(Exception):
 
 class InvalidRegistryItemType(ValueError):
     """
-    Raised when an attempt is made to register an item in the registry which does not have a proper type.
+    Raised when an attempt is made to register an item in the registry which
+    does not have a proper type.
     """

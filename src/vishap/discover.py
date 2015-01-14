@@ -1,6 +1,6 @@
 __title__ = 'vishap.discover'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('autodiscover',)
 
@@ -30,7 +30,11 @@ def autodiscover():
         if os.path.isdir(PROJECT_DIR(full_app_path)):
             try:
                 import_module(
-                    "vishap.{0}.{1}.{2}".format('.'.join(PLUGINS_DIR), app_path, PLUGIN_MODULE_NAME)
+                    "vishap.{0}.{1}.{2}".format(
+                        '.'.join(PLUGINS_DIR),
+                        app_path,
+                        PLUGIN_MODULE_NAME
+                        )
                     )
             except ImportError as e:
                 logger.debug(str(e))

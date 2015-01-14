@@ -1,8 +1,8 @@
 __title__ = 'vishap.base'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('BaseVideoPlugin', 'plugin_registry')
+__all__ = ('BaseVideoPlugin', 'plugin_registry',)
 
 import re
 
@@ -28,10 +28,12 @@ class BaseVideoPlugin(object):
 
     def __init__(self):
         # Making sure all necessary properties are defined.
-        for prop in ('uid', 'name', 'url_pattern', 'embed_code', 'width_param_code', 'height_param_code'):
+        for prop in ('uid', 'name', 'url_pattern', 'embed_code', \
+                     'width_param_code', 'height_param_code'):
             if not getattr(self, prop):
                 raise ImproperlyConfigured(
-                    "You should define ``{0}`` property in your ``{1}.{2}`` class.".format(
+                    "You should define ``{0}`` property in your ``{1}.{2}`` "
+                    "class.".format(
                         prop, self.__class__.__module__, self.__class__.__name__
                         )
                     )
@@ -40,7 +42,8 @@ class BaseVideoPlugin(object):
         for meth in ('match', 'render'):
             if not callable(getattr(self, meth, None)):
                 raise ImproperlyConfigured(
-                    "You should define ``{0}`` method in your ``{1}.{2}`` class.".format(
+                    "You should define ``{0}`` method in your ``{1}.{2}`` "
+                    "class.".format(
                         prop, self.__class__.__module__, self.__class__.__name__
                         )
                     )
@@ -82,7 +85,12 @@ class BaseVideoPlugin(object):
                 options.append(self.width_param_code.format(width=width))
             if height:
                 options.append(self.height_param_code.format(height=height))
-            response = mark_safe(self.embed_code.format(video_id=video_id, options=' '.join(options)))
+            response = mark_safe(
+                self.embed_code.format(
+                    video_id = video_id,
+                    options = ' '.join(options)
+                    )
+                )
             return response
 
         return ''
@@ -101,7 +109,8 @@ class BaseVideoPlugin(object):
 
 class BaseRegistry(object):
     """
-    Registry of dash plugins. It's essential, that class registered has the ``uid`` property.
+    Registry of dash plugins. It's essential, that class registered has
+    the ``uid`` property.
     """
     type = None
 
@@ -117,9 +126,11 @@ class BaseRegistry(object):
         :param mixed.
         """
         if not issubclass(cls, self.type):
-            raise InvalidRegistryItemType("Invalid item type `{0}` for registry `{1}`".format(cls, self.__class__))
+            raise InvalidRegistryItemType("Invalid item type `{0}` for registry "
+                                          "`{1}`".format(cls, self.__class__))
 
-        # If item has not been forced yet, add/replace its' value in the registry
+        # If item has not been forced yet, add/replace its' value in the
+        # registry.
         if force:
 
             if not cls.uid in self._forced:
@@ -145,7 +156,8 @@ class BaseRegistry(object):
         elif issubclass(cls, self.type):
             uid = cls.uid
         else:
-            raise InvalidRegistryItemType("Invalid item type `{0}` for registry `{1}`".format(cls, self.__class__))
+            raise InvalidRegistryItemType("Invalid item type `{0}` for registry "
+                                          "`{1}`".format(cls, self.__class__))
 
         # Only non-forced items are allowed to be unregistered.
         if uid in self._registry and not uid in self._forced:

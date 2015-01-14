@@ -1,8 +1,11 @@
 __title__ = 'vishap.utils'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
-__all__ = ('render_video', 'ensure_autodiscover', 'get_registered_plugins', 'get_registered_plugin_uids')
+__all__ = (
+    'render_video', 'ensure_autodiscover', 'get_registered_plugins',
+    'get_registered_plugin_uids',
+)
 
 #from vishap.exceptions import PluginCodeError, PluginNotFound, PluginDetectionError
 from vishap.base import plugin_registry
@@ -19,8 +22,8 @@ def ensure_autodiscover():
 
 def get_registered_plugins():
     """
-    Gets a list of registered plugins in a form if tuple (plugin name, plugin description). If not yet
-    autodiscovered, autodiscovers them.
+    Gets a list of registered plugins in a form if tuple (plugin name,
+    plugin description). If not yet autodiscovered, autodiscovers them.
 
     :return list:
     """
@@ -35,8 +38,8 @@ def get_registered_plugins():
 
 def get_registered_plugin_uids():
     """
-    Gets a list of registered plugins in a form if tuple (plugin name, plugin description). If not yet
-    autodiscovered, autodiscovers them.
+    Gets a list of registered plugins in a form if tuple (plugin name,
+    plugin description). If not yet autodiscovered, autodiscovers them.
 
     :return list:
     """
@@ -69,7 +72,8 @@ def render_video(url, width=None, height=None, plugin_uid=None):
             # TODO: Log warnings
             return ''
 
-    # No preferred plugin has been given. Detect which one shall be used and render.
+    # No preferred plugin has been given. Detect which one shall be used and
+    # render.
     for plugin_uid, plugin_cls in get_registered_plugins():
         plugin = plugin_cls()
         if plugin.match(url):

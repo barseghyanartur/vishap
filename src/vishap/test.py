@@ -2,7 +2,7 @@
 
 __title__ = 'vishap.tests'
 __author__ = 'Artur Barseghyan'
-__copyright__ = 'Copyright (c) 2013 Artur Barseghyan'
+__copyright__ = 'Copyright (c) 2013-2015 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = ('VishapTest',)
 
@@ -70,25 +70,42 @@ class VishapTest(unittest.TestCase):
     Tests of ``vishap.utils.render_video``.
     """
     def setUp(self):
-        self.vimeo_url = 'http://vimeo.com/45655450'
-        self.youtube_url = 'http://www.youtube.com/watch?v=LIPl7PtGXNI'
+        self.vimeo_urls = (
+            'http://vimeo.com/45655450',
+        )
+        self.youtube_urls = (
+            'http://www.youtube.com/watch?v=LIPl7PtGXNI',
+            'https://www.youtube.com/watch?v=LIPl7PtGXNI',
+        )
 
-        self.rendered_vimeo_embed_code = """
-        <iframe src="//player.vimeo.com/video/45655450" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        """.strip()
+        self.rendered_vimeo_embed_codes = (
+            """
+            <iframe src="//player.vimeo.com/video/45655450" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            """.strip(),
+        )
 
-        self.rendered_vimeo_embed_code_responsive = """
-        <iframe src="//player.vimeo.com/video/45655450"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        """.strip()
+        self.rendered_vimeo_embed_codes_responsive = (
+            """
+            <iframe src="//player.vimeo.com/video/45655450"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            """.strip(),
+        )
 
-        self.rendered_youtube_embed_code = """
-        <iframe src="//www.youtube.com/embed/LIPl7PtGXNI" width="560" height="315" frameborder="0" allowfullscreen></iframe>
-        """.strip()
-
-        self.rendered_youtube_responsive_embed_code = """
-        <iframe src="//www.youtube.com/embed/LIPl7PtGXNI"  frameborder="0" allowfullscreen></iframe>
-        """.strip()
-
+        self.rendered_youtube_embed_codes = (
+            """
+            <iframe src="//www.youtube.com/embed/LIPl7PtGXNI" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+            """.strip(),
+            """
+            <iframe src="//www.youtube.com/embed/LIPl7PtGXNI" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+            """.strip(),
+        )
+        self.rendered_youtube_responsive_embed_codes = (
+            """
+            <iframe src="//www.youtube.com/embed/LIPl7PtGXNI"  frameborder="0" allowfullscreen></iframe>
+            """.strip(),
+            """
+            <iframe src="//www.youtube.com/embed/LIPl7PtGXNI"  frameborder="0" allowfullscreen></iframe>
+            """.strip(),
+        )
         #reset_to_defaults_settings()
 
     @print_info
@@ -103,13 +120,33 @@ class VishapTest(unittest.TestCase):
         self.assertEqual(res, c)
         return res
 
+    def _test_render_video(self, video_url, rendered_video_embed_code, width, height):
+        """
+        Test rendering of video.
+        """
+        res = render_video(video_url, width, height).strip()
+        self.assertEqual(res, rendered_video_embed_code)
+        return res
+
+    def _test_render_video_responsive(self, video_url, rendered_video_embed_code_responsive):
+        """
+        Test rendering of video.
+        """
+        res = render_video(video_url).strip()
+        self.assertEqual(res, rendered_video_embed_code_responsive)
+        return res
+
     @print_info
     def test_02_render_vimeo(self):
         """
         Test rendering of Vimeo.
         """
-        res = render_video(self.vimeo_url, 500, 281).strip()
-        self.assertEqual(res, self.rendered_vimeo_embed_code)
+        res = []
+        for counter, vimeo_url in enumerate(self.vimeo_urls):
+            res.append(self._test_render_video(vimeo_url, \
+                                               self.rendered_vimeo_embed_codes[counter],
+                                               500,
+                                               281))
         return res
 
     @print_info
@@ -117,8 +154,10 @@ class VishapTest(unittest.TestCase):
         """
         Test rendering of Vimeo.
         """
-        res = render_video(self.vimeo_url).strip()
-        self.assertEqual(res, self.rendered_vimeo_embed_code_responsive)
+        res = []
+        for counter, vimeo_url in enumerate(self.vimeo_urls):
+            res.append(self._test_render_video_responsive(vimeo_url, \
+                                                          self.rendered_vimeo_embed_codes_responsive[counter]))
         return res
 
     @print_info
@@ -126,8 +165,12 @@ class VishapTest(unittest.TestCase):
         """
         Test rendering of Youtube.
         """
-        res = render_video(self.youtube_url, 560, 315).strip()
-        self.assertEqual(res, self.rendered_youtube_embed_code)
+        res = []
+        for counter, youtube_url in enumerate(self.youtube_urls):
+            res.append(self._test_render_video(youtube_url, \
+                                               self.rendered_youtube_embed_codes[counter],
+                                               560,
+                                               315))
         return res
 
     @print_info
@@ -135,8 +178,10 @@ class VishapTest(unittest.TestCase):
         """
         Test rendering of Youtube responsive.
         """
-        res = render_video(self.youtube_url).strip()
-        self.assertEqual(res, self.rendered_youtube_responsive_embed_code)
+        res = []
+        for counter, youtube_url in enumerate(self.youtube_urls):
+            res.append(self._test_render_video_responsive(youtube_url, \
+                                                          self.rendered_youtube_responsive_embed_codes[counter]))
         return res
 
     @print_info
@@ -160,8 +205,8 @@ class VishapTest(unittest.TestCase):
         plugin_registry.register(ExamplePlugin)
 
         assert 'example' in get_registered_plugin_uids()
-        res = render_video(self.youtube_url, plugin_uid='example').strip()
-        self.assertEqual(res, self.rendered_youtube_responsive_embed_code)
+        res = render_video(self.youtube_urls[0], plugin_uid='example').strip()
+        self.assertEqual(res, self.rendered_youtube_responsive_embed_codes[0])
         return res
 
     @print_info
@@ -219,6 +264,7 @@ class VishapTest(unittest.TestCase):
         self.assertEqual(True, override_settings())
 
         return override_settings()
+
 
 if __name__ == '__main__':
     unittest.main()
