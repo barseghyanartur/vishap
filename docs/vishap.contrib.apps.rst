@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    vishap.contrib.apps.django_vishap
+    vishap.contrib.apps.django
 
 Module contents
 ---------------

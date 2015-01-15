@@ -4,11 +4,14 @@
 .hg/
 .tox/
 
-example/db/
-example/tmp/
-build/
-builddocs/
-builddocs.zip
-dist/
-src/vishap.egg-info
+/examples/db/
+/examples/tmp/
+/examples/logs/
+/examples/static/
+/build/
+/builddocs/
+/builddocs.zip
+/dist/
+/src/vishap.egg-info
+/examples/example/local_settings.py
 

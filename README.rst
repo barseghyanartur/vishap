@@ -78,7 +78,7 @@ If you want your embed code to fill the available area, render it without
 ``width`` and ``height`` attributes and place it in a container to which it
 shall stretch.
 
-Example
+Example:
 
 .. code-block:: python
 
@@ -87,6 +87,13 @@ Example
     </div>""".format(
         embed_code = render_video('http://www.youtube.com/watch?v=LIPl7PtGXNI')
     )
+
+It would then result the following output:
+
+.. code-block:: html
+
+    <iframe src="//www.youtube.com/embed/LIPl7PtGXNI"
+    frameborder="0" allowfullscreen></iframe>
 
 Your CSS file should then look similar to the following
 
@@ -137,6 +144,42 @@ the registry.
         """
 
     plugin_registry.register(UpdatedYoutubePlugin, force=True)
+
+Django integration
+==================================
+Installation
+----------------------------------
+Add `vishap.contrib.apps.django.vishap` to `INSTALLED_APPS`
+
+.. code-block:: python
+
+    INSTALLED_APPS = (
+        # ...
+        'vishap.contrib.apps.django.vishap',
+        # ...
+    )
+
+Usage
+----------------------------------
+In your template:
+
+Example #1:
+
+.. code-block:: html
+
+    {% load vishap_tags %}
+    {% render_video 'http://www.youtube.com/watch?v=LIPl7PtGXNI' 560 315 as rendered_video_example_1 %}
+    {{ rendered_video_example_1|safe }}
+
+Example #2:
+
+.. code-block:: html
+
+    {% load vishap_tags %}
+    {% with video_url='http://vimeo.com/41055612' video_width='500' video_height='281' %}
+    {% render_video video_url video_width video_height as rendered_video_example_2 %}
+    {{ rendered_video_example_2|safe }}
+    {% endwith %}
 
 Missing a plugin?
 ==================================

@@ -4,9 +4,11 @@ Based on MoSCoW principle.
 
 Must haves
 --------------------------
-- Better docs.
++ Better docs.
++ Image extraction for Vimeo and Youtube.
++ Django contrib app for rendering the video in templates.
+- Basic tests for the Django contrib app.
 - URL validator (with selectable services).
-- Image extraction for Vimeo and Youtube.
 - Django form widget (with selectable services).
 - Django URL validator (against selected services).
 

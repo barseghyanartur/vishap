@@ -5,8 +5,11 @@ syntax: regexp
 \.gitignore~
 \.tox
 
-^example/db/
-^example/tmp/
+^examples/db/
+^examples/tmp/
+^examples/static/
+^examples/logs/
+^examples/example/local_settings\.py
 ^build/
 ^builddocs/
 ^builddocs.zip

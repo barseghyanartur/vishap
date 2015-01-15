@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load vishap_tags %}
+
+{% block content %}
+    <h1>Render examples</h1>
+
+    <div>
+        <h2>Example #1</h2>
+        <pre>
+        {% verbatim %}
+    {% render_video 'http://www.youtube.com/watch?v=LIPl7PtGXNI' 560 315 as rendered_video_example_1 %}
+    {{ rendered_video_example_1|safe }}
+            {% endverbatim %}
+        </pre>
+        <div>
+        {% render_video 'http://www.youtube.com/watch?v=LIPl7PtGXNI' 560 315 as rendered_video_example_1 %}
+        {{ rendered_video_example_1|safe }}
+        </div>
+    </div>
+
+    <div>
+        <h2>Example #2</h2>
+        <pre>
+            {% verbatim %}
+    {% with video_url='http://vimeo.com/41055612' video_width=500 video_height=281 %}
+    {% render_video video_url video_width video_height as rendered_video_example_2 %}
+    {% endwith %}
+    {{ rendered_video_example_2|safe }}
+            {% endverbatim %}
+        </pre>
+        <div>
+        {% with video_url='http://vimeo.com/41055612' video_width='500' video_height='281' %}
+        {% render_video video_url video_width video_height as rendered_video_example_2 %}
+        {{ rendered_video_example_2|safe }}
+        {% endwith %}
+        
+        </div>
+    </div>
+
+{% endblock content %}

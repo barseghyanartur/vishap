@@ -1,5 +1,13 @@
 Release history
 =====================================
+0.1.4
+-------------------------------------
+2015-01-16
+
+- Added support for wheel packages.
+- Added Django contrib package for rendering the video directly in the
+  templates.
+
 0.1.3
 -------------------------------------
 2015-01-11
