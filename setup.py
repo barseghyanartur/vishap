@@ -8,7 +8,7 @@ try:
 except:
     readme = ''
 
-version = '0.1.4'
+version = '0.1.5'
 
 install_requires = [
     'six>=1.4.1',
@@ -23,7 +23,9 @@ except:
 setup(
     name = 'vishap',
     version = version,
-    description = ("Generate embed (HTML) code of services like Youtube or Vimeo from URLs given. Rules are specified in the plugins."),
+    description = ("Generate embed (HTML) code of services like Youtube or "
+                   "Vimeo from URLs given. Rules are specified in the "
+                   "plugins."),
     long_description = readme,
     classifiers = [
         "Programming Language :: Python",

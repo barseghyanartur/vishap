@@ -8,7 +8,8 @@ try:
     from django.apps import AppConfig
 
     class Config(AppConfig):
-        name = label = 'vishap.contrib.apps.django.vishap'
+        name = 'vishap.contrib.apps.django.vishap'
+        label = 'vishap_contrib_apps_django_vishap'
 
 except ImportError:
     pass
